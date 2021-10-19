@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier --write \"*src/**/*.{js,jsx}\""
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/gango-anan/pure-react/issues"
   },
-  "homepage": "https://github.com/gango-anan/pure-react#readme"
+  "homepage": "https://github.com/gango-anan/pure-react#readme",
+  "devDependencies": {
+    "prettier": "^2.4.1"
+  }
 }
