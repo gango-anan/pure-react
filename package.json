@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "format": "prettier --write \"*src/**/*.{js,jsx}\""
+    "format": "prettier --write \"*src/**/*.{js,jsx}\"",
+    "lint": "eslint \"*src/**/*.{js,jsx}\" --quiet"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,8 @@
   },
   "homepage": "https://github.com/gango-anan/pure-react#readme",
   "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.4.1"
   }
 }
