@@ -1,15 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useBreedList from "./useBreedList";
+import Pet from "./Pet";
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
-  const [location, setLocation] = useState("Seatle, WA");
+  const [location, setLocation] = useState("");
   // Another way of writing the above statement is
   // const locationTuple = useState("Seatle, WA");
   // const location = locationTuple[0];
   // const setLocation = locationTuple[1];
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
-  const breeds = [];
+  const [pets, setPets] = useState([]);
+  const [breeds] = useBreedList(animal);
+
+  useEffect(() => {
+    requestPests();
+  }, []);
+
+  async function requestPests() {
+    const res = await fetch(
+      `http://pets-v2.dev-apis.com/pets?breeds=${animal}&location=${location}&breed=${breed}`
+    );
+    const listOfPets = await res.json();
+    setPets(listOfPets.pets);
+  }
 
   const updateLocation = (event) => {
     setLocation(event.target.value);
@@ -24,7 +39,6 @@ const SearchParams = () => {
             type="text"
             id="location"
             onChange={updateLocation}
-            // onChange={(e) => setLocation(e.target.value)}
             value={location}
             placeholder="Location"
           />
@@ -45,18 +59,6 @@ const SearchParams = () => {
             ))}
           </select>
         </label>
-
-        <label htmlFor="location">
-          Location
-          <input
-            type="text"
-            id="location"
-            onChange={updateLocation}
-            // onChange={(e) => setLocation(e.target.value)}
-            value={location}
-            placeholder="Location"
-          />
-        </label>
         <label htmlFor="breed">
           Breed
           <select
@@ -75,6 +77,9 @@ const SearchParams = () => {
         </label>
         <button>Submit</button>
       </form>
+      {pets.map((pet) => (
+        <Pet key={pet.id} name={pet.name} animal={pet.animal} />
+      ))}
     </div>
   );
 };
