@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import useBreedList from "./useBreedList";
-import Pet from "./Pet";
+import Results from "./Results";
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
   const [location, setLocation] = useState("");
-  // Another way of writing the above statement is
-  // const locationTuple = useState("Seatle, WA");
+  //= Another way of writing the above statement is =
+  // const locationTuple = useState("");
   // const location = locationTuple[0];
   // const setLocation = locationTuple[1];
   const [animal, setAnimal] = useState("");
@@ -77,9 +77,7 @@ const SearchParams = () => {
         </label>
         <button>Submit</button>
       </form>
-      {pets.map((pet) => (
-        <Pet key={pet.id} name={pet.name} animal={pet.animal} />
-      ))}
+      <Results pets={pets} />
     </div>
   );
 };
